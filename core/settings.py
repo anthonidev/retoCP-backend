@@ -9,7 +9,6 @@ import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 env = environ.Env()
 environ.Env.read_env()
 ENVIRONMENT = env
@@ -24,7 +23,6 @@ DOMAIN = os.environ.get("DOMAIN")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -50,7 +48,6 @@ THIRD_PARTY_APPS = [
     "rest_framework_simplejwt.token_blacklist",
 ]
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + MAIN_APPS + THIRD_PARTY_APPS
-
 
 MIDDLEWARE = [
     "social_django.middleware.SocialAuthExceptionMiddleware",
@@ -87,7 +84,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "core.wsgi.application"
 django_heroku.settings(locals())
 DATABASES = {
-    "default": env.db("HEROKU_POSTGRESQL_MAROON_URL", default="postgres:///auth"),
+    "default": env.db("HEROKU_POSTGRESQL_MAROON_URL",
+                      default="postgres:///auth"),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
@@ -114,16 +112,20 @@ PASSWORD_HASHERS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME":
+        "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME":
+        "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME":
+        "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME":
+        "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -147,31 +149,37 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
 )
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
-    ],
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 9,
+    "DEFAULT_PERMISSION_CLASSES":
+    ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
+    "DEFAULT_AUTHENTICATION_CLASSES":
+    ("rest_framework_simplejwt.authentication.JWTAuthentication", ),
+    "DEFAULT_PAGINATION_CLASS":
+    "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE":
+    9,
 }
 SIMPLE_JWT = {
-    "AUTH_HEADER_TYPES": ("JWT",),
+    "AUTH_HEADER_TYPES": ("JWT", ),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10080),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "ROTATE_REFRESFH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
-    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken", ),
 }
 
 DJOSER = {
-    "LOGIN_FIELD": "email",
-    "USER_CREATE_PASSWORD_RETYPE": True,
-    "SEND_CONFIRMATION_EMAIL": False,
-    "PASSWORD_RESET_CONFIRM_RETYPE": True,
-    "SEND_ACTIVATION_EMAIL": False,
-    "SOCIAL_AUTH_TOKEN_STRATEGY": "djoser.social.token.jwt.TokenStrategy",
+    "LOGIN_FIELD":
+    "email",
+    "USER_CREATE_PASSWORD_RETYPE":
+    True,
+    "SEND_CONFIRMATION_EMAIL":
+    False,
+    "PASSWORD_RESET_CONFIRM_RETYPE":
+    True,
+    "SEND_ACTIVATION_EMAIL":
+    False,
+    "SOCIAL_AUTH_TOKEN_STRATEGY":
+    "djoser.social.token.jwt.TokenStrategy",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": [
         "http://localhost:8000/google",
         "http://localhost:8000/facebook",
